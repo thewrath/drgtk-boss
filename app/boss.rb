@@ -4,15 +4,13 @@ class Boss
   include Animation
 
   def defaults
-    @started_running_at ||= state.tick_count
-    
-    add_animation(:idle, 6, 8, true, false, 'sprites/bosses/Old_King/idle.png')
-    add_animation(:attack, 10, 8, true, false, 'sprites/bosses/Old_King/attack.png')
-    add_animation(:attack2, 9, 8, true, false, 'sprites/bosses/Old_King/attack2.png')
-    add_animation(:attack3, 9, 8, true, false, 'sprites/bosses/Old_King/attack3.png')
-    add_animation(:death, 12, 8, true, false, 'sprites/bosses/Old_King/death.png')
-    add_animation(:hit, 4, 8, true, false, 'sprites/bosses/Old_King/hit.png')
-    add_animation(:walk, 8, 8, true, false, 'sprites/bosses/Old_King/walk.png')
+    add_animation(:idle, 6, 8, true, false, 220, 220, 'sprites/bosses/death_king/idle.png', :vertical)
+    add_animation(:attack, 10, 8, true, false, 220, 220, 'sprites/bosses/death_king/attack.png', :vertical)
+    add_animation(:attack2, 9, 8, true, false, 220, 220, 'sprites/bosses/death_king/attack2.png', :vertical)
+    add_animation(:attack3, 9, 8, true, false, 220, 220, 'sprites/bosses/death_king/attack3.png', :vertical)
+    add_animation(:death, 12, 8, true, false, 220, 220, 'sprites/bosses/death_king/death.png', :vertical)
+    add_animation(:hit, 4, 8, true, false, 220, 220, 'sprites/bosses/death_king/hit.png', :vertical)
+    add_animation(:walk, 8, 8, true, false, 220, 220, 'sprites/bosses/death_king/walk.png', :vertical)
 
     set_current_animation :idle if not @current_animation
     
@@ -23,12 +21,14 @@ class Boss
     self.args = args
     defaults
 
+    pipe_animations([:attack, :attack3, :death], [10*8, 9*8, 12*8])
+
     # @x  = -220 if @x > (grid.right - 220/2)
     outputs.sprites << {
       x: @x,
       y: 0,
-      w: 220*2,
-      h: 220*2,
+      w: 220*4,
+      h: 220*4,
     }.merge(get_current_sprite)
   end
 end
