@@ -21,8 +21,6 @@ class Boss
     self.args = args
     defaults
 
-    pipe_animations([:attack, :attack3, :death])
-
     # @x  = -220 if @x > (grid.right - 220/2)
     outputs.sprites << {
       x: @x,
