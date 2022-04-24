@@ -12,7 +12,7 @@ class Player
     add_animation(:hit, 4, 8, true, false, 160, 111, 'sprites/king/take_hit_white.png')
     add_animation(:death, 6, 10, true, false, 160, 111, 'sprites/king/Death.png')
 
-    set_current_animation :run if not @current_animation
+    set_current_animation(:run) if not @current_animation
     
     @x  ||= 0
   end
@@ -21,7 +21,9 @@ class Player
     self.args = args
     defaults
 
-    pipe_animations([:idle, :run, :death], [8*8, 8*8, 6*10])
+    if inputs.keyboard.key_down.space
+      pipe_animations([:attack2, :attack1, :attack3])
+    end
 
     # @x  = -220 if @x > (grid.right - 220/2)
     outputs.sprites << {
